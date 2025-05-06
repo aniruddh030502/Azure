@@ -1,0 +1,172 @@
+Day5
+
+commands:-
+
+1 az login
+
+  2 az --version
+
+  3 account list
+
+  4 az account list
+
+  5 az account list --output
+
+  6 az account list --output table
+
+  7 az account list --output yaml
+
+  8 az account list --output json
+
+  9 az config set defaults.location="eastus"
+
+  10 az config set defaults.group="yogesh-rg"
+
+  11 az account list
+
+  12 az account set --subscription "bf7e75db-e819-49ca-b6d2-69c32a2353fe"
+
+  13 az group --list
+
+  14 az group list
+
+  15 az group list --help
+
+  16 az group list --query "[location='eastus']"
+
+  17 az group list --query "[location="eastus"]"
+
+  18 az group list --query "[location=="eastus"]"
+
+  19 az group list --query "[location=='eastus']"
+
+  20 az group list --query "[?location=='eastus']"
+
+  21 az group list --query "[?name=='yogesh']"
+
+  22 az group list --query "[?name=='yogesh-rg']"
+
+  23 az group list "[.name]" --output tsv
+
+  24 az group list "[].name" --output tsv
+
+  25 az group list --query "[.name]" --output tsv
+
+  26 az group list --query "[].name" --output tsv
+
+  27 az group list --query "[].name" --output tsv | grep yogesh
+
+  28 az group list --query "[].name" --output tsv >> abc.txt
+
+  29 ls
+
+  30 cat abc.txt
+
+  31 ip a
+
+  32 az vm list
+
+  33 rm -rf abc.txt
+
+  34 ls
+
+  35 az show config
+
+  36 az config get defaults
+
+  37 az vm list
+
+  38 az vm list -g Admin-Azure --query "[].name" --output tsv
+
+  39 az vm list -g Admin-Azure --query "[].{Name:name}" --output tsv
+
+  40 az vm list -g Admin-Azure --query "[].{Name:name, Resource Group:resource group}" --output tsv
+
+  41 az vm list -g Admin-Azure --query "[].{Name:name, ResourceGroup:resourceGroup}" --output tsv
+
+  42 az storage account list
+
+  43 az storage account list -g NewVilasRG
+
+  44 az storage account list -g yogesh-sa
+
+  45 az storage account list -g yogesh-rg
+
+  46 env | grep -i storage
+
+
+
+
+
+1 0.008 Connect-AzAccount
+
+  2 0.088 Connect-AzAccount -AccessToken {AccessToken} -AccountId {AccountId} -GraphAccessToken {GraphAccessToken} -Tenant {Tenant} -S…
+
+  3 33.016 Connect-AzAccount -UseDeviceAuthentication
+
+  4 0.011 get-AzContext
+
+  5 0.610 set-AzContext -Subscription "bf7e75db-e819-49ca-b6d2-69c32a2353fe"
+
+  6 0.414 set-Azsubscription
+
+  7 0.575 get-AzSubscription
+
+  8 0.341 Get-AzResourceGroup
+
+  9 0.223 Get-AzResourceGroup --help
+
+ 10 0.311 get-AzResourceGroup -Name --help
+
+ 11 0.032 get-AzResourceGroup -Location {eastus}
+
+ 12 0.016 get-AzResourceGroup -Location {centralindia}
+
+ 13 0.252 get-AzResourceGroup -Location centralindia
+
+ 14 0.166 get-AzResourceGroup -Name yogesh-rg
+
+ 15 0.313 get-AzVM -ResourceGroupName yogesh-rg
+
+ 16 1.217 get-AzVM
+
+ 17 0.434 get-AzVM
+
+ 18 11.481 remove-AzVM -ResourceGroupName PRADHISHA-RG
+
+ 19 0.486 get-AzVM
+
+ 20 0.573 get-AzVM
+
+ 21 58.382 remove-AzVM -ResourceGroupName PRATHEEKRG
+
+ 22 0.821 get-AzVM
+
+ 23 1:35.779 new-AzvM -ResourceGroupName PRATHEEKRG -Location centralindia
+
+ 24 4.443 new-AzvM
+
+ 25 0.275 get-AzVM -ResourceGroupName PRATHEEKRG
+
+ 26 0.622 get-AzVM
+
+ 27 0.741 get-AzVM
+
+ 28 1:25.262 new-AzVM -ResourceGroupName yogesh-rg -Name {Name} -Location centralindia
+
+ 29 0.018 remove-AzVM -Name {Name} -ResourceGroupName yogesh-rg
+
+ 30 44.787 remove-AzVM -Name Name -ResourceGroupName yogesh-rg
+
+ 31 0.700 get-AzVM
+
+ 32 0.752 get-AzVM
+
+
+
+we create a VM and set the OS disk and NIC to be deleted when we delete the VM.
+
+New-AzVm -ResourceGroupName "myResourceGroup" -Name "myVM" -OSDiskDeleteOption Delete -NetworkInterfaceDeleteOption Delete -Location "East US" -VirtualNetworkName "myVnet" -SubnetName "mySubnet" -SecurityGroupName "myNetworkSecurityGroup" -PublicIpAddressName "myPublicIpAddress"
+
+
+

@@ -1,0 +1,108 @@
+Here’s an explanation of the hierarchy in Azure that includes Tenant, Management Groups, Subscriptions, Resource Groups, and Resources. These components are key to organizing and managing your Azure environment, ensuring a structured and scalable approach to cloud management.
+
+Azure Hierarchy Structure
+Azure has a hierarchical structure that helps organize and manage resources efficiently. Below is the hierarchy, starting from the highest level down to the resources:
+
+1. Tenant
+Definition: A Tenant represents a dedicated instance of Azure Active Directory (Azure AD), which is the identity and access management service. It’s essentially the highest level of organization in Azure and is tied to your Azure AD instance.
+
+Role: It is used to manage users, groups, and organizational policies, and is the root container for all your Azure subscriptions and resources. It provides authentication and authorization for Azure resources.
+
+Key Points:
+
+A tenant can have multiple subscriptions.
+
+Tenants are typically associated with a specific organization, and their users and groups are used for managing access to resources.
+
+One tenant is required for each Azure Active Directory instance.
+
+Example: "Contoso.com" could be a tenant name associated with an organization’s Azure environment.
+
+2. Management Groups
+Definition: Management Groups are used to manage multiple subscriptions in a hierarchical manner. They are a container for organizing subscriptions and applying governance policies at scale.
+
+Role: Management Groups help organize subscriptions into a hierarchy for easier management and policy enforcement across subscriptions. They enable you to apply policies, permissions, and compliance requirements at a higher level than individual subscriptions.
+
+Key Points:
+
+You can have multiple management groups under a tenant.
+
+Management groups can be nested, allowing a multi-level hierarchy (up to 6 levels deep).
+
+Root management group is the topmost level (automatically created when the tenant is created).
+
+Policies, role-based access control (RBAC), and Azure Blueprints can be applied at the management group level.
+
+Example: A global organization with multiple departments could have management groups like "Sales", "Finance", and "IT" under the tenant, each managing their own subscriptions.
+
+3. Subscription
+Definition: A Subscription is an agreement between a user or organization and Azure, providing access to Azure resources. A subscription defines the boundaries of billing, usage, and access control.
+
+Role: Subscriptions are the next level down in the hierarchy after management groups. They are used to group and manage Azure resources. Each subscription has its own set of billing, resource usage, and access control policies.
+
+Key Points:
+
+Subscriptions are tied to a tenant and can belong to different management groups.
+
+A single tenant can have multiple subscriptions, which allows for better isolation of workloads, environments, or billing purposes.
+
+Each subscription has a unique subscription ID and is used for resource management, billing, and usage tracking.
+
+Example: A company might have separate subscriptions for different environments like "Development", "Staging", and "Production", or separate subscriptions for different business units (e.g., "Marketing Subscription" and "HR Subscription").
+
+4. Resource Group
+Definition: A Resource Group is a container that holds related Azure resources for an application or workload. It is the next level after subscriptions and allows you to manage resources collectively.
+
+Role: Resource groups are used to organize resources that share similar lifecycle requirements and can be managed together. They provide a logical grouping of related resources to make it easier to manage and monitor them.
+
+Key Points:
+
+Resources within the same resource group can be managed and deployed together.
+
+A resource group can contain resources from different regions (geographically distributed), but it is recommended to keep resources in the same region when possible for performance reasons.
+
+Access control, monitoring, and resource management (e.g., tagging, deployment) can be done at the resource group level.
+
+Resources in a resource group should be managed as a unit for lifecycle management (creation, deletion, and scaling).
+
+Example: An application might have a Resource Group called "WebAppRG" that includes resources like virtual machines, storage accounts, and networking components needed to support the web application.
+
+5. Resource
+Definition: A Resource is any individual service or component within Azure, such as a Virtual Machine (VM), Storage Account, Web App, or SQL Database. Resources are the actual objects that provide the functionality of your application or infrastructure.
+
+Role: Resources are the lowest level in the hierarchy and represent the actual services or components that you use in Azure. They are the entities you interact with daily when building and managing solutions in the cloud.
+
+Key Points:
+
+Resources are created within a Resource Group and are associated with a Subscription.
+
+Resources can be managed, scaled, and configured independently, but they are typically organized by Resource Groups for easier management.
+
+Every Azure resource has a resource ID and is part of an Azure service (e.g., Virtual Machine, Blob Storage, Network Interface).
+
+Example: Individual resources could include a Virtual Machine (VM), an Azure SQL Database, a Storage Account, or a Load Balancer.
+
+Hierarchy Summary
+Here’s a summary of the Azure hierarchy structure from top to bottom:
+
+
+Level	Description	Example
+1. Tenant	A dedicated instance of Azure Active Directory (Azure AD), providing identity and access management.	Contoso.com Tenant
+2. Management Groups	Organizes multiple subscriptions into a hierarchical structure to manage resources at scale.	"Sales", "Finance", "IT"
+3. Subscription	A logical container for billing and resource management. A single tenant can have multiple subscriptions.	"Development Subscription", "Prod Subscription"
+4. Resource Group	A logical container for Azure resources, often used for organizing resources with similar lifecycle needs.	"WebAppRG", "VMGroup"
+5. Resource	An individual Azure service or component, like a Virtual Machine, Storage Account, or Web App.	"MyVM", "MyStorageAccount"
+Example Scenario:
+Let’s assume you have a company called Contoso, which uses Azure for its infrastructure:
+
+Tenant: Contoso.com is the Azure AD tenant for the company.
+
+Management Groups: You might have management groups like Contoso-Sales and Contoso-IT to organize different departments.
+
+Subscriptions: Under Contoso-Sales, there might be a subscription for testing (Sales-Dev) and a production subscription (Sales-Prod). The IT department might have its own subscriptions, like IT-Prod.
+
+Resource Groups: Within the Sales-Dev subscription, you could have resource groups like Sales-Dev-RG for development-related resources.
+
+Resources: Inside the Sales-Dev-RG, you could deploy specific resources like SalesWebApp, SalesVM, SalesDB.
+
+This hierarchical structure provides clarity, security, and ease of management as it scales, especially in large organizations with complex workloads.

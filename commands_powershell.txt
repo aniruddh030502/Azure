@@ -1,0 +1,241 @@
+Here are notes on PowerShell Commands in Azure — these commands are primarily used to manage and automate Azure resources from the command line. Azure PowerShell provides a set of cmdlets that help you manage various Azure services, such as virtual machines, storage, networking, and more.
+
+Getting Started with Azure PowerShell
+Before using Azure PowerShell, you need to set up and configure your environment.
+
+1. Installing Azure PowerShell
+To get started with Azure PowerShell, first install the Azure PowerShell module.
+
+Install-Module: Install Azure PowerShell from the PowerShell Gallery.
+
+powershell
+Copy
+Edit
+Install-Module -Name Az -AllowClobber -Force -SkipPublisherCheck
+This installs the Az module, which is the recommended module for interacting with Azure resources.
+
+2. Importing the Azure Module
+If you have already installed Azure PowerShell and want to use it, import the module into your PowerShell session:
+
+powershell
+Copy
+Edit
+Import-Module Az
+3. Logging into Azure
+To start working with Azure resources, you need to authenticate to your Azure account.
+
+powershell
+Copy
+Edit
+Connect-AzAccount
+This command will prompt you to sign in with your Azure credentials. After successful authentication, you can interact with Azure resources.
+
+Common Azure PowerShell Commands
+1. Managing Subscriptions
+To view your current subscription and set a specific one:
+
+View Current Subscription:
+
+powershell
+Copy
+Edit
+Get-AzContext
+List All Subscriptions:
+
+powershell
+Copy
+Edit
+Get-AzSubscription
+Switch Subscription:
+
+powershell
+Copy
+Edit
+Set-AzContext -SubscriptionId "your-subscription-id"
+2. Managing Resource Groups
+A Resource Group is a container for Azure resources that share the same lifecycle.
+
+Create a Resource Group:
+
+powershell
+Copy
+Edit
+New-AzResourceGroup -Name "MyResourceGroup" -Location "EastUS"
+Get Information About a Resource Group:
+
+powershell
+Copy
+Edit
+Get-AzResourceGroup -Name "MyResourceGroup"
+Delete a Resource Group:
+
+powershell
+Copy
+Edit
+Remove-AzResourceGroup -Name "MyResourceGroup"
+3. Managing Virtual Machines
+Azure PowerShell makes it easy to create, manage, and delete virtual machines.
+
+Create a Virtual Machine:
+
+powershell
+Copy
+Edit
+New-AzVM -ResourceGroupName "MyResourceGroup" -Location "EastUS" -Name "MyVM" -ImageName "UbuntuLTS"
+Start a Virtual Machine:
+
+powershell
+Copy
+Edit
+Start-AzVM -ResourceGroupName "MyResourceGroup" -Name "MyVM"
+Stop a Virtual Machine:
+
+powershell
+Copy
+Edit
+Stop-AzVM -ResourceGroupName "MyResourceGroup" -Name "MyVM"
+Get Information About a Virtual Machine:
+
+powershell
+Copy
+Edit
+Get-AzVM -ResourceGroupName "MyResourceGroup" -Name "MyVM"
+Delete a Virtual Machine:
+
+powershell
+Copy
+Edit
+Remove-AzVM -ResourceGroupName "MyResourceGroup" -Name "MyVM"
+4. Managing Azure Storage
+Azure PowerShell can also be used to manage Azure Storage accounts, containers, and blobs.
+
+Create a Storage Account:
+
+powershell
+Copy
+Edit
+New-AzStorageAccount -ResourceGroupName "MyResourceGroup" -Name "mystorageaccount" -Location "EastUS" -SkuName "Standard_LRS"
+Get Storage Account Keys:
+
+powershell
+Copy
+Edit
+Get-AzStorageAccountKey -ResourceGroupName "MyResourceGroup" -AccountName "mystorageaccount"
+Create a Blob Container:
+
+powershell
+Copy
+Edit
+New-AzStorageContainer -Name "mycontainer" -Context $storageContext
+Upload a File to Blob Storage:
+
+powershell
+Copy
+Edit
+Set-AzStorageBlobContent -File "C:\Path\To\File.txt" -Container "mycontainer" -Blob "File.txt" -Context $storageContext
+5. Managing Azure Networking
+Azure networking commands help you manage virtual networks, subnets, and network interfaces.
+
+Create a Virtual Network:
+
+powershell
+Copy
+Edit
+New-AzVirtualNetwork -ResourceGroupName "MyResourceGroup" -Location "EastUS" -Name "MyVNet" -AddressPrefix "10.0.0.0/16"
+Create a Subnet in a Virtual Network:
+
+powershell
+Copy
+Edit
+Add-AzVirtualNetworkSubnetConfig -Name "MySubnet" -AddressPrefix "10.0.1.0/24" -VirtualNetwork $vnet
+Create a Public IP Address:
+
+powershell
+Copy
+Edit
+New-AzPublicIpAddress -ResourceGroupName "MyResourceGroup" -Name "MyPublicIP" -Location "EastUS" -AllocationMethod Dynamic
+Create a Network Interface:
+
+powershell
+Copy
+Edit
+New-AzNetworkInterface -Name "MyNIC" -ResourceGroupName "MyResourceGroup" -Location "EastUS" -SubnetId $subnet.Id
+6. Managing Azure Active Directory (Azure AD)
+Azure AD can be managed with PowerShell commands to handle users, groups, and roles.
+
+Create a New User:
+
+powershell
+Copy
+Edit
+New-AzureADUser -DisplayName "John Doe" -UserPrincipalName "johndoe@mydomain.com" -Password "P@ssw0rd" -ForceChangePasswordNextSignIn $true
+Get Information About Users:
+
+powershell
+Copy
+Edit
+Get-AzureADUser
+Add a User to a Group:
+
+powershell
+Copy
+Edit
+Add-AzureADGroupMember -GroupId "GroupObjectId" -RefObjectId "UserObjectId"
+Create a New Group:
+
+powershell
+Copy
+Edit
+New-AzureADGroup -DisplayName "Admins" -MailEnabled $false -SecurityEnabled $true -MailNickname "admins"
+7. Managing Azure Resource
+Azure PowerShell allows you to list and manage various Azure resources.
+
+List All Resources in a Resource Group:
+
+powershell
+Copy
+Edit
+Get-AzResource -ResourceGroupName "MyResourceGroup"
+Delete an Azure Resource:
+
+powershell
+Copy
+Edit
+Remove-AzResource -ResourceId "resource-id"
+Move a Resource to Another Resource Group:
+
+powershell
+Copy
+Edit
+Move-AzResource -DestinationResourceGroupName "NewResourceGroup" -ResourceId "resource-id"
+Advanced PowerShell Cmdlets
+1. Automation and Scheduling
+Run a Script on a Schedule: Use Azure Automation and Azure Runbooks to execute tasks at specified times.
+
+Using Azure Logic Apps: Automate workflows by integrating PowerShell scripts with Azure Logic Apps for more complex workflows.
+
+2. Monitoring and Logging
+Azure PowerShell also integrates with Azure Monitor and Azure Log Analytics to enable monitoring.
+
+View Activity Logs:
+
+powershell
+Copy
+Edit
+Get-AzActivityLog -ResourceGroupName "MyResourceGroup"
+Get Metrics for Resources:
+
+powershell
+Copy
+Edit
+Get-AzMetric -ResourceId "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}" -MetricName "Percentage CPU"
+Helpful PowerShell Cmdlets for Automation
+Start-AzVM: Start a virtual machine.
+
+Stop-AzVM: Stop a virtual machine.
+
+Set-AzVM: Update virtual machine properties.
+
+New-AzResourceGroupDeployment: Deploy an Azure Resource Manager (ARM) template.
+
+Export-AzResourceGroupTemplate: Export an ARM template for resources in a resource group.
